@@ -5,6 +5,7 @@ import static application.util.Constants.ERR_PASSWORD_MISSING_LETTER;
 import static application.util.Constants.ERR_PASSWORD_MISSING_NUMBER;
 import static application.util.Constants.USER_PASSWORD_LENGTH;
 import static application.util.Constants.USER_PASSWORD_PATTERN;
+import static application.util.Constants.VALID_PASSWORD_MESSAGE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class PasswordValidator {
 			return validationMessages;
 		}
 		if (password.matches(USER_PASSWORD_PATTERN)) {
+			validationMessages.add(VALID_PASSWORD_MESSAGE);
 			return validationMessages;
 		} else if (!password.matches("^(?=.*[A-Za-z])[A-Za-z\\d]{8,}$")) {
 			validationMessages.add(ERR_PASSWORD_MISSING_LETTER);

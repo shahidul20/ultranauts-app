@@ -16,8 +16,11 @@ public class PasswordValidatorTest {
 	public void passwordRequirment_validPassword() {
 		String password = "password123";
 
+		List<String> expectedMessage = new ArrayList<>();
+		expectedMessage.add(Constants.VALID_PASSWORD_MESSAGE);
+
 		List<String> validationMessage = passwordValidator.validatePassword(password);
-		Assert.assertEquals(new ArrayList<>(), validationMessage);
+		Assert.assertEquals(expectedMessage, validationMessage);
 	}
 
 	@Test
