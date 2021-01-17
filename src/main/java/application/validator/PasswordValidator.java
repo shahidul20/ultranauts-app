@@ -1,20 +1,38 @@
 package application.validator;
 
-import application.util.Constants;
+import static application.util.Constants.ERR_PASSWORD_LENGTH;
+import static application.util.Constants.ERR_PASSWORD_MISSING_LETTER;
+import static application.util.Constants.ERR_PASSWORD_MISSING_NUMBER;
+import static application.util.Constants.USER_PASSWORD_LENGTH;
+import static application.util.Constants.USER_PASSWORD_PATTERN;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PasswordValidator {
 
-	public String validatePasswordRequirement(String password) {
-		String validationMessage;
-		String passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
-
-		if (password != null && password.matches(passwordPattern)) {
-			validationMessage = Constants.VALID_PASSWORD_MESSAGE;
-		} else {
-			validationMessage = Constants.INVALID_PASSWORD_MESSAGE;
+	public List<String> validatePassword(String password) {
+		List<String> validationMessages = new ArrayList<>();
+		if (password == null || password == "") {
+			validationMessages.add(ERR_PASSWORD_LENGTH);
+			validationMessages.add(ERR_PASSWORD_MISSING_LETTER);
+			validationMessages.add(ERR_PASSWORD_MISSING_NUMBER);
+			return validationMessages;
 		}
-
-		return validationMessage;
+		if (password.length() < USER_PASSWORD_LENGTH) {
+			validationMessages.add(ERR_PASSWORD_LENGTH);
+			return validationMessages;
+		}
+		if (password.matches(USER_PASSWORD_PATTERN)) {
+			return validationMessages;
+		} else if (!password.matches("^(?=.*[A-Za-z])[A-Za-z\\d]{8,}$")) {
+			validationMessages.add(ERR_PASSWORD_MISSING_LETTER);
+			return validationMessages;
+		} else if (!password.matches("^(?=.*\\d)[A-Za-z\\d]{8,}$")) {
+			validationMessages.add(ERR_PASSWORD_MISSING_NUMBER);
+			return validationMessages;
+		}
+		return validationMessages;
 	}
 
 }
