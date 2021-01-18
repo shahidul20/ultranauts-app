@@ -2,7 +2,7 @@ package application.validator;
 
 import static application.util.Constants.ADMIN_ACCOUNT_TYPE;
 import static application.util.Constants.ERR_ADMIN_PASSWORD_LENGTH;
-import static application.util.Constants.ERR_ADMIN_PASSWORD_SPECIAL_CHARACTER;
+import static application.util.Constants.ERR_ADMIN_PASSWORD_SPECIAL_CHARACTER_LENGTH;
 import static application.util.Constants.ERR_PASSWORD_LENGTH;
 import static application.util.Constants.ERR_PASSWORD_MISSING_LETTER;
 import static application.util.Constants.ERR_PASSWORD_MISSING_NUMBER;
@@ -40,7 +40,7 @@ public class PasswordValidatorTest {
 
 	@Test
 	public void passwordRequirementShouldFailWithNoLetter() {
-		String password = "12345678";
+		String password = "1234567890";
 		List<String> expectedMessage = new ArrayList<>();
 		expectedMessage.add(ERR_PASSWORD_MISSING_LETTER);
 		List<String> message = passwordValidator.validatePassword(NORMAL_ACCOUNT_TYPE, password);
@@ -49,7 +49,7 @@ public class PasswordValidatorTest {
 
 	@Test
 	public void passwordRequirementShouldFailWithNoNumber() {
-		String password = "abCdefGxY";
+		String password = "abCdefGxYSR";
 		List<String> expectedMessage = new ArrayList<>();
 		expectedMessage.add(ERR_PASSWORD_MISSING_NUMBER);
 		List<String> message = passwordValidator.validatePassword(NORMAL_ACCOUNT_TYPE, password);
@@ -90,7 +90,7 @@ public class PasswordValidatorTest {
 	public void passwordRequirementShouldFailWithNoSpecialCharacter() {
 		String password = "password123456";
 		List<String> expectedMessage = new ArrayList<>();
-		expectedMessage.add(ERR_ADMIN_PASSWORD_SPECIAL_CHARACTER);
+		expectedMessage.add(ERR_ADMIN_PASSWORD_SPECIAL_CHARACTER_LENGTH);
 		List<String> message = passwordValidator.validatePassword(ADMIN_ACCOUNT_TYPE, password);
 		Assert.assertEquals(expectedMessage, message);
 	}
@@ -105,4 +105,5 @@ public class PasswordValidatorTest {
 		List<String> message = passwordValidator.validatePassword(ADMIN_ACCOUNT_TYPE, password);
 		Assert.assertEquals(expectedMessage, message);
 	}
+
 }

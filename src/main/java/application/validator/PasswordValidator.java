@@ -5,6 +5,7 @@ import static application.util.Constants.ADMIN_USER_PASSWORD_LENGTH;
 import static application.util.Constants.ADMIN_USER_PASSWORD_PATTERN;
 import static application.util.Constants.ERR_ADMIN_PASSWORD_LENGTH;
 import static application.util.Constants.ERR_ADMIN_PASSWORD_SPECIAL_CHARACTER;
+import static application.util.Constants.ERR_ADMIN_PASSWORD_SPECIAL_CHARACTER_LENGTH;
 import static application.util.Constants.ERR_PASSWORD_LENGTH;
 import static application.util.Constants.ERR_PASSWORD_MISSING_LETTER;
 import static application.util.Constants.ERR_PASSWORD_MISSING_NUMBER;
@@ -38,7 +39,7 @@ public class PasswordValidator {
 				validationMessages.add(ERR_ADMIN_PASSWORD_LENGTH);
 				return validationMessages;
 			} else if (!password.matches(ADMIN_USER_PASSWORD_PATTERN)) {
-				validationMessages.add(ERR_ADMIN_PASSWORD_SPECIAL_CHARACTER);
+				validationMessages.add(ERR_ADMIN_PASSWORD_SPECIAL_CHARACTER_LENGTH);
 				return validationMessages;
 			}
 			validationMessages.add(VALID_PASSWORD_MESSAGE);
